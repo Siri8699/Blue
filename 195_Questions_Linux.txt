@@ -1,0 +1,882 @@
+﻿(1) How will you create an empty line in vi editor?
+Ans: escape mode O
+
+(2) How will delete a word in vi editor?
+Ans: dw
+
+(3) How will you go to fifth line in vi editor?
+Ans: escape mode 5 shift+g
+
+(4) How will you save as a file in vi editor?
+Ans: :w filename
+
+(6) How will you search for a word alclabs in a file called m1.txt using vi editor?
+Ans: :/alclabs nn ( /alclabs will finds the line in which the word is present and nn will helps you to find the word in line)
+
+(7) How will you replace a word alclabs with 'my alclabs' using vi editor (all occurrences)?
+Ans: %s/alclabs /my alclabs
+
+(8) How will you copy a file by safeguarding privileges?
+Ans: cp -pr sourcepath destination path
+
+(9)  How will you know which terminal you are working?
+Ans: tty
+
+(10) How will know your currently logged in shell ?
+Ans: echo $SHELL
+
+(11) Syntax to rename a directory? 
+Ans: mv oldname newname
+ 
+(12) How will you know your currently logged in shell?
+Ans: echo $SHELL
+
+(13) Given umask 000 what is the effetive value for file and directory?
+Ans: There will no changes on file and directory
+
+(14) How will see the kernel in RHEL? Where is the Kernel located ?
+Ans: uname -r 
+        cat /oroc/version
+
+(15) what is the importance of expr keyword in shell ?
+Ans: It is used to excute a expressions in shellscripting
+
+(16) How will you know if the file is executable using file test command ?
+Ans:ls -l
+
+(17) What is if-elif syntax ?
+Ans:if <test condition true>
+       then
+           statement 1
+           statement 2
+                 . 
+                 .
+           statementn
+     else
+           statement 1
+           statement 2
+                  .
+                  .
+           statementn
+     fi
+      
+(18) what is $? represents in the shell ?
+Ans: It is used print whether the previous command is runned successfully.
+        If 0 means successful. If 1 means failure. 
+
+(19) Demonstrate setuid with an example ?
+Ans: setuid helps us to run a program as if the owner is running
+ ex: chmod u+s  /usr/bin/cp
+
+(20) How can i change my primary group to one of my secondary groups temporarily ?
+Ans: First we need to login into that particular user and use newgrp groupname command to change the secondary group of a particular user to primary group... 
+
+(21) What is epoch time? what /etc/shadow file consists of ? and what are its permissions?
+Ans: The time elapsed since  1970 jan 1,00hrs,00mins. 
+        /etc/shadow fields: username: encrypted password:password last change:minimum age: maximum age: warning days: inactive days: expiry: blank
+       Permissions : 000
+
+(22) How will you change user password expiry to Non Expiry ?
+Ans: chage -M 9999999 username													
+
+(23) How will make sure that the normal user will be prompted after changing its password by root ?
+Ans: You will be prompted to enter your current password. If the password is correct, the command will ask you to enter and confirm the new password.
+
+(24) How will you change shell filed in /etc/passwd ?
+Ans: usermod -s /bin/ksh username
+        chsh username
+
+(25)  How will you know configuration files belongs to a particular package?
+Ans: rpm -ql configuration file
+
+(26) What are the recommended permissions for $HOME/.ssh directory? 
+Ans: 700
+
+(28) What are the different login controls you can apply for an user ?
+Ans: chage policies
+       /etc/security/limits.conf
+       /etc/nologin
+       /sbin/nologin
+       /etc/ssh/sshd_config
+       usermod options
+       passwd options
+
+(29) How will you see at what date and time the user last logged in ?
+Ans: last
+
+(30) ftp is failing when i am uploading a 3GB file? What could be the reason?
+Ans:May be at client side there is no disk space to store the data and there may be a chance to set ulimits for a file.
+
+(31) last command is not showing recent transactions? how will fix the problem ?
+Ans: Beacause /var/log/wtmp file is corrupted
+
+(32) On which user ownership the crontab files are configured ?
+Ans:When you create a crontab file, it is automatically placed in the /var/spool/cron/crontabs directory and is given your user name. You can create or edit a crontab file for another user, or root, if you have superuser privileges.
+
+(33) Describe Crontab format ?
+Ans: min hours date month day_of_the_week  path to the command
+
+(34) What is daemon? how will you see process id of particular daemon?
+Ans: Daemon is the process that continously running in the background 
+        ps -ef | grep daemon name
+
+(35) How will check crontab scheduled yesterday night is successful or not ?
+Ans: cat /var/log/cron
+
+(36) No ordinary user is getting permitted to run cron ? why ?
+Ans: Because if the cron.allow file exist in our system and it is empty then no ordinary user can't run the cron jobs. 
+
+(37) What is nohup command ?
+Ans: Nohup command is used to run processes even after exiting the shell and terminal.Nohup command is used to redirect the output or errors of the file into the nohup .out file when you exit the terminal
+
+(38) I have a script scheduled in cron that generate errors some time and I want discard those errors. How ?
+Ans:you can redirect the error output to the null device, which discards the output. This can be done using the redirection operator 2>/dev/null.
+
+(39) How will you change PE size. If yes, what the rules to be followed ?
+Ans: vgchange -s PEsize vgname
+
+(40) How will you mirror a filesystem in Linux LVM?
+Ans: lvcreate -n lvname -m no.of copies -L lv size vgname pv1 pv2
+        mkfs.xfs /dev/vgname/lvname
+        mount /dev/vgname/lvname /mountpoint
+
+(41) How will you configure a filesystem /myfs as Raid-1 ?
+Ans:  *pvcreate /dev/sdb /dev/sdc
+        then i will create a vg using vgcreate command
+        *vgcreate -s 16M vgname /dev/sdb /dev/sdc
+        then i will create mirror lv using lvcreate command
+        *lvcreate --type raid1 -n lvname -l [LE's] -m1 vgname pv1 pv2.
+        now i will install filesystem by using mkfs command
+        *mkfs.xfs /dev/vg/lv
+        then i will mount it using mount command
+        *mount /dev/vg/lv /myfs  
+
+(42) How will you know free space left in the VG?
+Ans: vgdisplay vgname
+
+(43) What is the procedure to remove a PV from volume group ?
+Ans: vgreduce vgname pvname can also do on fly
+
+(44) How will you find wwn of hba cards?  How will you scan and delete luns given by SAN team. What info your need to provide to SAN team inorder to obtain LUNS from them.
+Ans: systool -c fc_host-A "port_name"
+         we will scan the lun with echo command 
+        -->echo "- - -" > /sys/class/scsi_host/host*/scan
+        to delete a LUN
+        --> echo 1 >/sys/block/diskname/device/delete
+        we need to give the wwn id to the SAN team to obtain the LUN from SAN team.
+
+(45) What is the difference between single user mode and maintenance mode?
+Ans: Single user mode dont required the root password. It will allows you to repair your system in situations when it is unable to complete a regular booting process. 
+
+        Maintenance mode requires the root password.It allows you to repair your system. It will try to mount all local file systems and start some important system  services.
+
+(46) How will you loginin to Server Console (both physical and Virtual server) ?
+Ans:  If I want to connect with physical server,I will access the physical server by idrac or ilom ip I will enter into the physical server and power on and                  launch the screen of the physical server.
+
+        Connect to the virutal server using a remote console or remote desktop tool such as PuTTY, Remote Desktop Connection, or VMware vSphere Client.
+
+(47) What  are the differences between ext2, ext3 and ext4 filesystem?
+Ans: ext2 -->Ext2 stands for second extended file system
+                      It doesn't have journal
+        ext3 -->Ext2 stands for third extended file system 
+    	    It will have journal 
+        ext4 --> Ext2 stands for fourth extended file system
+	     It have some extra features which will have extra feautres that which doesn't have in ext3
+
+(48) What is the difference between du and df ?
+Ans: du shows the disk usage .
+        df used to see the disk file system size.
+
+(49) Create an LV of Raid-0 with 4 Pvs ?
+Ans: pv and vg create
+        lvcreate -n lvname -L lvsize -i 4 -I 64K vgname pv1 pv2 pv3 pv4
+
+(50) How many disks required to configure Raid10 with stripe width 4 ?
+Ans: 8 disks are required to configure raid10
+
+(51) How will you make sure that in the next reboot, fsck will not perform on some of previously created old file sytems?
+Ans: By verifying /etc/fstab to that filesystem whether the last field is 0 or 1
+        By verifying tune2fs pathtofilesystem.
+(52)  What is iSCSI, configure iSCSI backing device and assign the same to the client with an example ?
+Ans: Internet Small Computer System Interface,
+       Server side:
+        yum install targetcli * -y
+         yum install iscsi* -y
+        targectli.....
+               ls
+               /backstores/block create disk1 /dev/sdb
+       cd iscsi
+       create iqn.2023-05.sireesha.alclabs.in
+       cd iqn.2023-05.sireesha.alclabs.in
+       cd tpg1
+      cd portals 
+    delete 0.0.0.0 3260
+    create 192.168.1.90
+    cd ..
+    cd luns 
+    create create /bcakstores/block/disk1
+   cd ..
+   cd acls
+   create iqn.2023-05.bhargavi.alclabs.in
+ Client side:
+    yum install iscsi* -y
+    iscsiadm -m discovery -t st -p 192.168.1.90
+    iscsiadm -m node -T iqn.2023-05.sireesha.alclabs.in -p 192.168.1.90 --login
+(53)  How will you boot the system in maintenance mode and how will you recover root password?
+ Ans: rd.break in grub menu ctrl+x
+        mount -o rw,remount /sysroot
+        chroot /sysroot
+        passwd: *********
+       retype password:*************
+       touch /.autorelabel
+       exit  
+       reboot
+
+(54) Max number of LVs that can accommodate a VG. ?
+Ans:its depends on various factors, such as the size of the VG, the size of the LVs, and the number of physical extents (PEs) available.
+
+(55) Max PE size for vg ?
+Ans : Default size of pe size in vg is 4M
+         The maximum number of PEs in a VG is limited to 2^32-1          (4,294,967,295), regardless of the PE size. So, the total size of a VG will               be limited by the product of  the PE size and the maximum number of               PEs.
+(56) How will you see contents of CD in Linux? complete step  by step procedure ?
+Ans: mount -o rw /dev/sr0 /mnt
+        cd /mnt
+         mnt~] ls -l
+
+(57) What are the different compoents of Linux LVM?
+Ans: pvs, lvs, vgs, lvm metadata, pvdisaplay, vgdisplay, lvdisplay.
+
+(58) Provide the format of  /etc/inittab?
+Ans:  id:runlevel:action:process
+
+(59) How will you know when the lv is created ?
+Ans: lsblk - it will show the vg and lvs
+       By using lvdisplay command, it will show the creation date of the lv. 
+
+(60) Provide the format of an entry in /etc/fstab file? what the meaning 0 and 0 appear at the end of entry in the /etc/fstab?
+Ans:  /dev/vg/lv		/mnt		xfs		defaults		0		0
+        it means that the file system should not be backed up (dump option set to 0) and should not be checked during system boot (fsck option set to 0).
+
+(61) How will you move the data from vg to another ?
+
+(62) What is a jounal log of a filesystem and what is its importance?
+Ans : The journal is an on-disk log of metadata, or data about the filesystem, that is kept up-to-date as the filesystem changes. Filesystems without journaling store changes to the updates in memory. These changes are periodically flushed from memory and written to disk
+
+(63) How will you create RAM FS ?
+Ans: mount -t tmpfs -o remount,size=256M /dev/ram22  /ram22
+
+(64) What is NFS? What is soft and hard mount in NFS ?
+Ans: NFS uses client - server architectutre. The server portion consists of physical disks containing a shared filesystems and server deamons that make shared file system visible and available for use by client system on that network. This process is normally referred to as exporting file system. 
+       Hard mount: When you mount nfs share using hard mount option,If the NFS server goes down, any proceses using the moutnted directory hang until the server comes  back and then continue processing without errors. Interruptable hard mounts may be interrupted with ctr-C
+        Soft mount: if the server is unreliable and you want to prevent systems from hanging when the server is down. When NFS tries to access a soft-mounted  directory, it gives up and returns an error message after trying retrans times
+
+(65) What is superblock ?
+Ans: The first block of the file system is a super block. Super Block is created when the file system is created. It contains the information about inode, inode bitmap, data bitmap and datablocks.
+
+(66) What is an inode  and what inode consists of?
+Ans: It is a datastructure that contains important information pertaining to a file. When filesystem is created, a set of inodes will get created and usually 1% of diskspace is allocated for inodes.
+The inode contains information such as file permissions,owner,group,modification time,file length,pointer to datablocks that contain data which makes the filesystem
+
+(67) Differentiate hard and soft link ?
+Ans: HARD LINK: More than one file can be referenced by a same inode number and file said to be hard linked each other.
+SOFT LINK: A softlink is a file which contains the name of the other file.
+
+(68) How will you create a swap space ? How will you see its usage?
+Ans: mkswap /dev/disk          ->lv creation
+        swapon /dev/disk          ->mkswap /dev/vgname/lvname
+        swapon -s                      -> swapon /dev/vgname/lvanme
+      -> cd /dirname
+      -> dd if=/dev/zero of=/dirname/swap.img bs=1M count=256
+     -> mkswap /dirname/swap.img
+     ->swapon /dirname/swap.img
+     ->chmod 600 swap.img
+     -> swapon -a
+
+(69) What is major and minor number ? How will you create block/character type device ?
+Ans: Major number -> It identifies  the device drives
+        Minor number ->It identifies the  device itself
+         
+(70) What is a null device ?
+Ans: It is an empty disk. Which is used to discard the input we are going to redirect it to /dev/null
+
+(71) What is swap space? swap space commands ? Explain ?
+Ans: Swap space is disk storage information that is resident in virtual memory, but is not currently being accessed. As memory fills, inactive pages are moved to the paging area on disk. It is very important to remember that paging is a temporary holding area for inactive pages; it is not a substitute for real memory. 
+
+(72) What is the use of network mask ?
+Ans:  In any subnet the first ip address is reserved for n/w address and last ip address is allocated for broadcast by using network mask.These two ip adresses can't be allocated to host.
+
+(73) What are the well known attributes of Ethernet adapter (interface) ?
+Ans:MAC address , ip address, subnet mask,mtu ,speed,gateway addresses, 
+
+(74) How will you see MAC of an Ethernet adapter ?
+Ans: lspci,lscpu,lshw,dmidecode-network
+
+(75) How do you know how many networks configured in your server ?
+Ans: lspci |grep -i ethernet
+       nmcli dev status
+       nmcli con show
+
+(76) How do you know what and all gateways configured in your server ?
+Ans: ip route show
+       netstat -nr
+(77) How do you know if ftp is configured and running in your server ?
+Ans: systemctl status ftpd 
+        systemctl status vsftpd 
+
+(78) How do you know how many FC adapters and Ethernet adapter exists in your server?
+Ans: lspci | grep fibre
+        lspci | grep -i ethernet
+
+(79) How do you know your server is virtual or physical server?
+Ans: lshw -c system | grep  product -> if product is pnp then it is physical server.
+ If it is vm then it is virtual server.
+      cat /sys/class/dmi/id/product-name 
+            -->VMware7,1
+(80) How will you see default gateway in your Linux box ?
+Ans:ip route show default
+       netstat -nr
+       route -n       
+
+(81) Steps to replace Ethernet adapter ?
+Ans:I will make sure i have ip,route,gateway and other attributes of the ethernet adapter and then
+        1. Shut down the server
+        2. remove the old adapter 
+        3. Install the new adapter 
+        4. Power on the server  
+        5. Configure the new adapter 
+        6. Test the new adapter
+
+(82) What is the importance of /etc/xinetd.conf ? what is its format ?
+
+(83) What is a service? How will start/stop/restart a service? How will you enable and disable the same?
+Ans: Service: It is an activity between client and server .
+         systemctl start service-name
+         systemctl stop service-name
+         systemctl restart service-name
+         systemctl enable service-name
+         systemctl disable service-name
+
+(84) What is anonymous ftp. How will you configure it ?
+Ans: Anonymous File Transfer Protocol (FTP) enables remote users to use the FTP server without an assigned user ID and password.
+        we configure it by editing the configuration file (/etc/vsftpd/vsftpd.conf) by changing the attribute value of anonymous_enable to yes
+
+(85) Importance of NSORDER environment variable ? what is the importance /etc/nsswitch.conf file?
+Ans:We can also change the order for name resolution by changing the environment variable NSORDER
+          Ex: NSOREDER= files, dns
+     /etc/nsswitch.conf file: defines the search order of the network databases
+
+(86) How will you make two machines as trusted ?
+Ans: By sharing public keys in between two machines by ssh-copy-id user@ip i will make them as trusted.
+
+(87) Why server filesystems went to read only mode? How will you fix the issue?
+Ans:Server filesystems can go into read-only mode for reasons they are 
+        1:- Disk errors or failures
+        2:- Filesystem errors
+        3:- Out of disk space
+        To fix the issue i will go with following steps
+        1:- Check the server logs
+        2:- Check disk usage and disk health
+        3:- Run a filesystem check
+        4:- Fix any hardware issues
+        5:- Reboot the server
+        Due to disk disconnect at storage end filsystem went to read only mode.
+        --> mount -o rw,remount /
+
+(88) How do you know if your server is connected with CD rom ? and How will you mount a DVD/CDROM in the server?
+ Ans: 
+       mount -o ro /dev/sr0 /mnt
+
+(89) What is port number ? port numbers for ftp,ssh, smtp, dns, dhcp, nfs, samba, ntp, http, https
+Ans: Port number is a communicate channel .
+       ftp:21
+       ssh :22
+       smtp:
+       dns:53
+       nfs:2049
+       samba: 139
+       ntp:
+       http:80
+       https:443
+
+(90) What is rc, rc.local and rc.sysinit scripts importance and why they are processed?
+
+(91) What is the importance of SGID enabling on directories?
+Ans: If we set sgid on the particular directory then  when we create a file and directory , it will help to the program as if the group owner is running – Additionally when enabled on directories, the group ownership is inherited by child directories
+
+(92)  How will you build a new server? What are the requirements you need before you build the server?
+Ans: Building a new server it involves several steps, The first step is to determine the server's purpose and requirements, such as the amount of processing power, storage capacity, memory, network bandwidth, and security features needed. This will help in selecting the appropriate hardware, software, and configuration  for the server.
+
+(93) How do I know my default gateway’s MAC address ?
+Ans: arp -a
+
+(94) Wha is the PID of init? How will you change the runlevel?
+Ans:  the PID of init is 1.
+        syntax :- # telinit 3
+                            |---> run levels 
+
+(95) What is the importance of ACLs and how will you add ACLs for file ?
+Ans: ACLs are used to add additional flexible permissions for a file or directory.
+        syntax: setfacl -m u:username:r-- filename
+
+
+(96) How will you apply ACLs of /etc/passwd to /etc/hosts ?
+Ans: getfacl /ect/passwd | setfacl --set-file=-/etc/hosts
+
+(97) Steps involved in creation of user using useradd command ?
+Ans: Syntax : useradd {username}
+                       passwd (or) echo username:passwd|chpasswd  
+
+(98) Discuss about attributes exists in /etc/shadow ?
+Ans : This file consists of 9 fields:
+          1) username 
+          2)Encrypted password
+          3)Password last change
+          4)Minimum age
+          5)Maximum age
+          6)Warning days
+          7)Inactive days
+          8)Account Expiry
+          9)Blank (future purpose)
+
+(99) What is the filesystem structure ?
+Ans: super block, inode bit map, inode, data block bit map, data block
+
+(100) How will you server load and what are the field in uptime command represents ?
+Ans: To check the server load, you can use various tools such as the top command, htop, sar, or vmstat. These tools provide real-time information about the server's CPU, memory, disk I/O, and network usage.
+   -->uptime command shows the system load average for the last 1, 5, and 15          minutes
+         # uptime
+         13:25:32 up 2 days,  4:37,  2 users,  load average: 0.45, 0.36, 0.32
+
+(101) How will you print the routing table?
+Ans: netstat -nr , route -n
+
+(102) What is Raid-5. What are minimum Disk requried? What is its fault-tolerance?
+Ans: it is a striping with distributed parity, it requries minimum 3 disks, The         fault tolerance of a RAID 5 array is one disk. it means one disk will get         fails the data can be reconstructed using the parity information from the         remaining disks.
+
+(103) What is chpasswd command importance ?
+Ans: chpasswd command is used to change the password for an user
+
+(104) How will you audit failed logins in your Linux box?
+Ans: /var/log/audit/ directory
+
+(105) How will change the priority of a running job?
+Ans: Using the renice command.....
+       renice -n  -priority_level process_id
+
+(106) How will you list block devices in the server?
+Ans: lsblk, lsscsi
+
+(107) What is minimum number of disks required to configure RAID-01?
+Ans: 4 disks 
+
+(108) Expand RAID? and list out different RAID levels
+Ans: Redundant Array of Independent Disk
+        raid0 - striping
+        raid1 - mirrioring
+        raid5 - striping with single disk failure
+        raid6 - striping with double disk failure
+        raid01/10 - striping and mirroring
+
+(109) How do you disable ftp for a particular user?
+Ans: Add that username in /etc/vsftpd/ftpusers or in /etc/vsftpd/user_list
+
+(110) What is the importance of initrd and what are its contents?
+Ans: It is a Tiny version of OS .The initial RAM disk (initrd) is an initial root file        system that is mounted prior to when the real root file system is available.         The initrd is bound to the kernel and loaded as part of the kernel boot        procedure. The initrd contains various executables and drivers that permit        the real root file system to be mounted, after which the initrd RAM disk is        unmounted and its memory freed.
+
+(111) How will configure user limits?
+Ans: In /etc/security/limits.conf file. I will configure the user limits.
+
+(112) what is the difference between fdisk and gdisk?
+Ans:  fdisk:
+              fdisk supports the MBR (Master Boot Record) partitioning scheme,               which is limited to a maximum of 2TB disk size and it has 3 primary               partitions and 1 extended partition.
+       gdisk:
+              gdisk supports both MBR and GPT (GUID Partition Table) partitioning               schemes, which can support much larger disk sizes and a larger               number of partitions.
+                                                                                       
+(113) What is the port number for NFS? Steps involved in configuring NFS share and mounting at client end?
+Ans: Nfs:2049
+        server side                                                             client side
+*****************************                         ********************************
+    1) mkdir /siri                                                  1)showmount -e 192.168.1.90
+    2)cd /siri                                                         2) mount -t nfs 192.168.1.52:/siri /siri1
+    3) siri~] touch file{1..10}                                
+    4) vi /etc/exports
+           i) /siri  192.168.1.52(rw,sec=sys,sync)
+    5)exportfs -vra
+
+(114 )What is rpcbind (or portmap in older version)?
+Ans: RPC stands for Remote procedure call, a protocal where as one program request a service from a program located in the other computer on a network.
+
+(115)What are NFS server side and client side daemons?
+Ans:  
+             server side                                    client side
+     ***********************          ********************************
+   1) nfsd                                               1)rpcbind
+   2)rpc.mountd                                    2)rpcstatd
+   3)rpc.statd                                         3)rpc.mountd
+   4)rpc.lokd
+   5)rpcbind
+   6)rpc.idmap
+
+(116) How will you confiugre multiplath for your storage devices?
+Ans:To configure Multipath for storage devices, follow these steps:
+        1. Install the multipath-tools package on your Linux system.
+        2. You can use the "lsblk" or "fdisk -l" command to list all the               availablelock devices on your system.
+        3. Edit the "/etc/multipath.conf" file to configure Multipath.
+        4. Reload Multipath configuration # systemctl restart multipathd
+        5. Verify Multipath by using "multipathd -ll" command
+        6. Mount Multipath devices " # mount /dev/mapper/mpath1              /mnt/multipath "
+
+(117) How will you login to server Console using iDRAC?
+Ans:
+
+(118) How will you see if your hardware is 64 or 32 bit?
+Ans: uname -m and dmidecode command will show the hardware is 64 or 32 bit.
+
+(119) How will you upgrade the kernel? Why do you need to upgrade the kernel? What is Kernel panic error and why it occurs?
+Ans: yum update kernel -y 
+
+(120) Will you know if the package is already installed in the server or not? How will seach for a particular package from the repository?
+Ans: yum list packagename* if pacakage name starts with @ then it is installed and if it is not starts @ it is not installed.
+       yum provides packagename  
+
+(121) What is ethernet bonding and how will you configure the same? What are the different modes availabe? what miimon option means?
+
+(122) Can you use filename as a mount point?
+Ans: No, you cannot use a filename as a mount point in Linux, mount point must be as a directory.
+
+(123) In NFS you usually export a directory. Can you export a file?
+  Ans: No we cannot export a file in nfs.It is used only for directories
+
+(124) How exactly bare metal server boots from the Kick start server?
+
+(125) How do you know OS version?
+Ans: cat /etc/redhat-release
+
+(126) What is the difference between MBR and GPT? and Explain what MBR consists of?
+Ans:          MBR                                                                                   GPT
+        *******************                                                         ********************
+   1)MBR stands for Master Boot Record                                1) GUID Partition Table (Globally Unique  identifier)                 
+   2)It is old partiton table system                                            2)It is new partition table system
+   3)It supports 3 primary partitions and                                 3)It supportd 128 partitions
+   one extended parition(we can upto 15 
+    partitions)  
+   4)we can't find about data corruption and                        4)we can be able to notice the problem and able to recover it.
+      can't be recoverd easily.                                                      Data can be recoverd easily.
+
+(127) What is mandatory required to boot server frsom Kickstart server ?
+
+(128) How will you increase and decrease filesystem?
+Ans:   Increasing file system                                        Decreasing file system                                              
+       ******************************                     ***************************************
+            ext based file system                                            ext based file system
+           ***********************                                       ***************************
+   1) creating a pv,vg,lv.                                                1)umount /mountpoint
+   2) mkfs.ext4 /dev/vgname/lvname                           2)e2fsck -f /dev/vgname/lvname
+   3) mount /dev/vgname/lvname /mountpoint          3)resize2fs /dev/vgname/lvname
+   4)lvextend -L +1G /dev/vgname/lvname                 4)lvreduce -L 1G /dev/vgname/lvname
+   5)resize2fs /dev/vgname/lvname                             5)mount /dev/vgname/lvname /mountpoint
+          
+           xfs based file system                                                       xfs based file system
+       *****************************                                       *******************************
+   1)creating pv,vg,lv.                                                    -> we can't decrease the xfs filesytem.It is the disadvantage 
+   2)mkfs.xfs /dev/vgname/lvname                                  of xfs filesystem
+   3)mount /dev/vgname/lvname
+   4)lvextend -L +1G /dev/vgname/lvname
+   5)xfs_growfs /dev/vgname/lvname
+
+(129) What is /etc/bootptab file consists of?
+
+(130) What is bootpd Daemon does?
+
+(131) What is tftpboot directory consists of?
+
+(132 How will you fix ntp synchronizing issues?
+
+(133) Brief the syntax of scp? What is the port number used by ssh,scp and sftp ?
+Ans: syntax: scp  [source]  [Destination]
+      ex: scp filename  root@192.168.1.52:/tmp
+          Port Number: 
+               scp:22 
+               ssh:22
+               vsftp:20
+
+(134) How will you create a repository? How will you add a package to already existing repository?
+Ans:  In /etc/yum.repo.d/ configuration file create a .repo file and then write the repo code in the file as shown below
+         [myrepo]
+         name=My Repository
+         baseurl=file:///var/myrepo
+         enabled=1
+         gpgcheck=0
+         gpgkey=file:///path/to/repo-key
+         To add a new package to an existing repository, simply copy the package to the repository directory and run the createrepo command again to regenerate the repository metadata. The new package will be available in the repository the next time you run the yum command.
+
+(135) Name the directory path where yum cache database is stored?
+Ans: /etc/yum.repos.d/ directory
+
+(136 How will you configure ssh password less authentication between two servers?
+Ans: By sharing the private keys to the remote server.
+         syntax: ssh-copy-id [ip]
+
+(137)How will you login to Linux server console if the sever is VMware virtual server?
+Ans: By the url and credentials provieded by the company i will enter into the          vcenter the i will choose the vm specified power on the vm and by login        and password i will enter into vm
+
+(138) How will you mirror existing filesystem called /fs1 with /dev/sdc?
+Ans: By using lvcovert command 
+        syntax :- lvconvert --type raid1 -m1 /path/to/lv pvname[/dev/sdc]
+        then i will mount it using mount command
+        syntax mount /path/to/lv /mount point.
+
+(139 )How will you move one LV from one VG to another?
+Ans: It is not possible directly you have to copy the contents in between vgs
+
+(140 When a filesystem can run out of space, what will you do?
+Ans:  I will remove files from filesystem by proper approvals or else i will          increase the file system.
+
+(141)How will you loign to server console, if the server is physical?
+Ans: By windows server and by idrac or ilom.
+  
+(142)How do you know if the Linux server you logged in is physical and virtual?
+Ans: By using dmidcode command
+         syntax :- dmidcode -s system-product-name.
+                         or
+         lspci | grep -i vm
+
+(143 How will you run fsck on root (/) filesystem?
+Ans: mount -o remount,ro /
+       fsck /
+       mount -o remount,rw /
+
+(144 How will you find ethernet card media speed? How will change the same?
+Ans: ethtool <interface-name>
+                 or
+        ethtool -s <interface-name> speed <media-speed>
+
+(145) How will you convert ext2 to ext3?
+Ans: 1)tune2fs -j /dev/vgname/lvname (on fly)
+        2)unmount /dev/vgname/lvname
+        3)mount /dev/vgname/lvname /mountpoint
+
+(146 How will you convert ext3 to ext4? Can you convert from ext4 to xfs ?
+Ans: 1)umount /dev/vgname/lvname
+        2)e2fsck -f /dev/vgname/lvname
+        3)tune2fs -o feautres(we need to add what had been missed in ext3 when it is comapred ext4) /dev/vgname/lvname
+        4) tune2fs -l /dev/vgname/lvname
+
+(147) What is the difference between Full, Incremental and Differential Backup?
+Ans:
+      Full Backup:
+               A full backup is a complete backup of all data on a system, including files, folders, and system configurations. A full backup takes up more space and time compared to other types of backups.
+       Incremental Backup:  
+                 An incremental backup only backs up the data that has changed since the last backup, whether it was a full backup or an incremental backup.Incremental backups are smaller and faster compared to full backups, but they require more time and effort to restore data in case of data loss.
+        Differential Backup: 
+                 A differential backup only backs up the data that has changed since the last full backup. This means that the differential backup  includes all the changes made since the last full backup, even if they were already backed up in previous differential backups. Differential backups are larger than incremental backups but smaller than full backups.
+
+(148 Tell me the booting process of Linux?
+Ans: power on--> post--> BIOS--> MBR--> GRUB2--> kernel--> systemd
+
+(149) What is GRUB? How will you set GRUB password and how will you recover the same? How will you reinstall grub?
+Ans: GRUB (Grand Unified Bootloader) is a popular bootloader used in many Linux distributions. It is responsible for loading the operating system kernel.
+         -->Setting a GRUB password can help protect the system from unauthorized access, in /etc/grub2.d/10_linux file i will edit the line which is starts with class , in this line i will remove '--unrestricted' word from the line then i will save the file and then i will set the password to the grub by using grub2-setpasswd command.
+
+(150 What is a Package ? Why do you need to upgrade the server to next leve?
+Ans:  package is a bundle of software, configuration files, and other related resources that can be easily installed, managed, and removed from a system. 
+         Upgrading the kernel provides various benefits, such as bug fixes, performance improvements, security patches, and support for new hardware and software. Kernel upgrades are essential for maintaining system stability and security.
+
+(151 Dicuss server paching/upgrade procedure in your organization? What is the output of /etc/redhat-release?
+Ans: * First we have to check kernal and OS versions by using uname -a and            cat /etc/redhat-release
+        * Then go to VMcenter and take a snapshot for the specified server 
+        * Power off the server
+        * Go to the edit settings and in cd/DVD add a latest version software from           ISO images from the datastore
+        * Then power on the server
+        * Now login to the terminal with required credentials
+        * Use 'yum clean all' command and 'yum repolist'
+        * Now use "yum upgrade -y" to update the all latest versions
+        * After update check kernel and OS versions, 
+        * The OS version changed to new version in /etc/redhat-release
+
+(152 How will You handle partial installed Packages? How will proceed with further installation/upgrade?
+Ans: yum history redo [jobnumber]
+
+(153)What is a repository? How will you define the repository? How will you enable and disable the same?
+Ans: Repository is a storage location where your system installs OS updates        and applications. Each repository is a collection of software hosted on a        remote server and intended to be used for installing and updating        software packages.
+       Syntax to enable and disable repos:
+        --> yum-config-manger --disable RHEL83_BASEOS
+        --> yum-config-manger --disable RHEL83_AppStream
+        --> yum-config-manger --enable RHEL83_BASEOS 
+        --> yum-config-manger --enable RHEL83_AppStream
+
+(154) How will you compress a directory?
+Ans: tar -zcvf filename.tar.gz [file path]
+
+(155)What are the contents of /boot filesystem?
+Ans: vmlinuz
+        initrd
+        grub
+
+(156)What is the importance of /etc/bashrc file in linux?
+Ans: Environmental variables and umask values are kept here
+
+(157) What is initramfs and what it contains?
+Ans:  It is a tiny kernel, contains executables and drivers to help kernel on mounting on real filesystem
+
+(158) What are the contents of /boot directory?
+Ans: vmlinuz
+        initrd
+        grub
+
+(159) How will you fix corrupted super block of a filesystem?
+Ans: run e2fsck -f /dev/vg/lv
+ 
+(160) What sudo? how will edit sudoers file? what are different sections available in /etc/sudoers?
+Ans: super user do in short form sudo ,To give root previledges to users it is          used
+         -->Alias section
+                    *user alias
+                    *host alias
+                    *runas alias
+                    *command alias
+         -->Default section
+         -->Specification section
+
+(161) The root filesystem is full and after housekeep still unable to see free space why?
+Ans: du -h *
+
+(162) What is access control of a file? What are the different commands used?
+Ans: ulimits
+        chmod
+        setfacl
+        getfacl
+
+(163) How will you change PE size of rootvg and user defined VG?
+Ans : vgchange -s pesize vgname
+
+(164) What is dmidecode command importance ?
+Ans : It Shows entire hardware information of server
+
+(165) What is sos report and what it contais? Where it is stored and how will you create a redhat case?
+Ans:  SOS: Save your Soul
+         -->sos report will collect all system information,diagnostic information                and configuration details. It is stored in /var/tmp.
+
+(166) How will you see contents of the tar file? How will you extract files from tar file?	
+Ans: tar -tvf filename
+
+(167) Where is LVM backup is kept and how will you recover the same?		
+Ans:  In /etc/lvm/backup lvm backup kept
+         vgcfgrestore -f /etc/lvm/archive/filename vgname.
+
+(168) How will you see it inode of a file/or directory? how will you delete a file using inode number?
+Ans: ls -li to see the inode number of the file. 
+        find ./ -inum number 
+
+(169) When try to attempt to  ssh, taking long time to get login prompt and once gets authenticated, it fast enough? what would be the issue?
+Ans: dns unable to resolute name
+
+(170) What is the improtance of fuser command ?
+Ans: By using the fuser command we can see what processes are running in that particular mount point
+
+(171) What is ether channel/bonding, and advantages? What is LACP?
+Ans: Etherchannel/Bonding is a technology used to combine multiple physical         network interfaces into a single logical interface.
+        -->advantages:-
+         *Increased bandwidth
+         *Redundancy
+         *Load balancing
+        LACP (Link Aggregation Control Protocol) is a standardized protocol used         to manage the creation and operation of link aggregation groups (LAGs)         in a network.
+
+(172) How will configure yum repo? What is the location and the contents of repo file?
+Ans: Create a new file in the "/etc/yum.repos.d/" directory with the ".repo"         extension.
+        -->e.g., "/etc/yum.repos.d/myrepo.repo". You can use any filename that               ends  with ".repo".
+         -->Edit the file you just created and specify the details of your repository                 using the following syntax:
+         [<repository_name>]
+         name=<Repository name>
+         baseurl=<Repository URL>
+         enabled=<1 or 0>
+         gpgcheck=<1 or 0>
+
+         -->then issue the command to check repos are created sucessfully or not
+         # yum repolist 
+    
+(173) Tell me steps in logging HW call with vendor (Dell or HP or Cisco etc)?
+
+(174) Where will you download Packages for Server upgrade?
+Ans: you can download packages from the official Red Hat repositories using         the YUM package manager.
+         -->now use "yum update -y" to install all available packages
+(175) Discuss password less authentication using  ssh?
+Ans: Passwordless authentication using SSH is a technique that allows users to         authenticate themselves to a remote server without entering a password.
+        Generate a public-private key pair on your local machine
+         #ssh-keygen -t [ rsa or dsa]
+        Copy the public key to the remote server
+         #ssh-copy-id [remote server ip].
+        -->ssh-copy-id remote server
+
+(176) What is the importance of  enabling sticky bit on directories?
+Ans: Enabling the sticky bit we can restrict the other users can't delete the files          in that particular directory 
+
+(177) Unable to unmount the filesystem? What would be the reason ?
+Ans: Because there will be processes running in the mount point  so we can't         unmount it.By using lsof and fuser commands we can see what processes         are running in it.
+
+(178) What is autofs and its importance. Discuss on direct and indirect mounts in autofs ?
+Ans: Autofs is an automount daemon that manages mount points as         needed.Autofs only mounts a given share when that share is being         accessed and are  unmounted after a defined period of inactivity
+       -->Indirect Mount: Indirect Mapping is used when we want to use large          number of entries to be associated with single directory (Such as users home a directory)
+       -->Direct Mount:Direct maps associates the filesystem locations directly with directory. In this case auto.master should have a dummy directory ( /- ).
+
+(179) What are the contents of /etc/init.d and /etc/rc.d directories ?
+
+(180) what is the default runlevel of Linux? How do you know the current runlevel ?
+Ans: Default runlevel : multi-user.target(runlevel 2)
+        systemctl get-default
+
+(181) What is importance of telinit command?
+Ans: The telinit command is used to change the runlevel of a Linux system.
+         For example, to switch to runlevel 3, you would run the following          -->command:
+                      #telinit 3
+(182) Discuss pre and post checks of server patching?
+Ans: check the kernel and OS versions of the server before and after patching.
+
+(183) How will you backup contents of LV When there is filesystem configured ?
+Ans: vgcfgbackup -f /tmp/filename.txt n_vgname (or)
+        vgcfgrestore -f /etc/lvm/archive/vgname
+
+(184) How will you repair corrupted filesystem?
+Ans: unmount the file system
+        run e2fsck command to fix the issues
+        -->syntax: e2fsck -f /path/to/lv
+
+(185) How do you know if oracle is running in your server ?
+Ans: ps -elf | grep oracle
+
+(186)  What is SAMBA and its configuration file? and parameters in configuration files inorder to define the share?
+Ans: Samba is an open source, free software suite that provides seamless file         and print services between Windows clients and UNIX-like platforms.
+        -->It's configuration file is /etc/samba/smb.conf.
+        -->Port Number : 139/tcp.
+
+(187) You got a call from customer, saying that the performance of the server is poor. What will you do ?
+
+(188) Have you ever done migration? if yes, from what version to what? How you did ?
+
+(189) You have done OS upgrade from Linux 6.4 to Linux 6.9. However, after the upgrade, the server stopped booting, Why, How will you troubleshoot?
+
+(190) How do you know which progran os taking much resources? How wiil you fix related performance issue ?
+
+(191) What are differnent protocols that Kickstart uses? Assume that you hava a bare metal kickstart client and you have booted it from Kickstart server. Now what are differnent ptotocols that it uses?
+
+(192) How will you come to know that there is memory bottlkeneck with the server?
+Ans: Real memory
+        paging
+        memory leaks
+
+(193) What are the precautions that you take when you performing OS upgrade/Patching?
+Ans: Taking snapshot
+
+(194) list out different performance commands? 
+Ans: sar [seconds] [no of intervals]
+        mpstat [seconds] [no of intervals]
+        vmstat [seconds] [no of intervals]
+        iostat [seconds] [no of intervals]
+        netstat -ntplu (options)
+
+(195) How do you know if a port is opened or not?
+Ans: By using the netstat command if the port number state shows listening it         means the socket is waiting for connection. If it shows eastablished it         means connection has been made. 
+        netstat -ntplu
+        nmap sireesha.alclabs.in | grep portnumbers
+        nmap -p 80 192.168.1.90
+        netstat -an | grep [:port]
+        ss - ntplu | grep [port number]

@@ -1,0 +1,165 @@
+1. What is Ansible?
+A. Ansible is an IT automation platform that makes applications and systems eaiser to deploy.
+     Ansible is an open source configuration management ans archestration uitlity.
+      Ansible is agent-less. Taks are pushed to remote host when ansoble excutes them.
+2. What is configuration management?
+A. Configuration Management is the process of maintaining systems, such as computer hardware and software, in a desired state.
+     Configuraton management tool that offers:
+           1.configuration of servers
+           2. Application deployment
+	 3. Continous testing of already installed applications.
+	 4. Provisioning
+	 5. Orchestration
+	 6. Automation of tasks
+
+3. What are the features of Ansible?
+A. The features of ansible are:
+     1. Free and open source application
+     2. Ansible is agentless
+     3. High Flexibility
+     4. Large no. of ready to use modules for system management
+     5. custom modules can be added further
+     6. configuration rool back (undo)
+     7. simple & human readable
+     8. self documentation
+     9. uses sudo to elevate its privileges
+
+4. What is Infrastructure as Code?
+A. Infrastructure as Code (IaC) is the managing and provisioning of infrastructure through code instead of through manual processes.
+
+5. What is the architecture of Ansible? How does it work?
+A.  There are two types:
+      1. control node   2. managed hosts
+     Ansible is installed on control node and all of its components are controlled in it or mainatained in it. The managed hosts are listed in host inventory.
+    The system adminstration log intp control node and launch ansible playbook. Ansible uses ssh as a network transport to communicate with managed hosts.
+
+6. What is an Ansible module?
+A. Modules are programs that perform the actual work of the tasks of a play. Ansible comes with hundreds of core modules that perform usual system adminstrative work. Ansible build on python.
+
+7. What are the different types of modules available?
+A. There are 3 types of modules :
+      1. core modules
+      2. Extra modules
+      3. Custom modules
+
+8. What is YAML?
+A. YAML is a human-readable data serialization language that is often used for writing configuration files.
+     YAML stands for yet another markup language or YAML ain’t markup language.
+ 
+9. What is a play?
+A. A play performs a series of tasks on the hosts or group of hosts.
+
+10. What is a playbook?
+A. A file that contains one or more plays called a playbook.
+     Ansible playbooks are files which describe the desired configuration or procedural steps to implement on managed hosts. Playbooks are written in YAML format.    
+
+11. What are Ansible ad-hoc commands?
+A. Ad-hoc commands will perform single task on remote servers in command line mode.If you want to perform more or multiple tasks at a time, you need playbook.
+     syntax: ansible hostpattern -m nodule -a 'arg1 arg2 ...' -i /path/to/inventoryfile -b
+
+12. What is the difference between a play and a playbook?
+A. A play performs a series of tasks on the hosts or group of hosts
+     Playbooks are collections of one or more plays that are performed in a certain order. Each play has a list of hosts to configure and responsibilities to complete.
+
+13. What are the different sections available in an Ansible play?
+A.  
+
+14. What is the Ansible configuration file?
+A.  /etc/ansible/ansible.cfg
+
+15. What is the Ansible inventory file?
+A. The Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. 
+
+16. What are the ansible tasks?
+A. 
+17.	Write an Ansible playbook to configure the server without root access.
+A.	
+18.	What are the plugins in Ansible?
+A.	Plugins are extensions thst enhance the ansible's functionality.
+
+19.	What is the difference between static and dynamic inventory?
+A.	
+20.	Write a playbook to install the Nginx web server.
+21.	What is the difference between Ansible and Puppet/Chef?
+22.	What are Ansible Tower and its features?
+23.	Give me an ad-hoc command to recursively copy files into a managed node.
+24.	How do you make Ansible content reusable and redistributable?
+25.	How do you generate an encrypted password using Ansible?
+26.	How are the notation and array notation of variables different?
+27.	What is an Ansible node?
+28.	How do the following modules work:
+	a) user
+	b) firewalld
+	c) synchronize
+	d) service
+29.	What is the difference between the package module and the yum module?
+30.	What are Ansible facts?
+31.	Difference between var_fails and include_file?	
+32.	What are magic variables?	
+33.	What are registered variables?	
+34.	What is a handler?	
+35.	What is the importance of the fail module?	
+36.	What are different ways to define an Ansible configuration file?	
+37.	What are host and group variables?	
+38.	How will you connect a managed node with a different port number over SSH?	
+39.	How will you encrypt a file with sensitive information?	
+40.	What is Ansible Vault?	
+41.	What is Ansible Galaxy?	
+42.	How does Ansible help automate repetitive activities in your organization?	
+43.	Explain the structure of an Ansible playbook using roles.	
+44.	How can you execute a specific set of tasks using an Ansible playbook?	
+45.	How does Ansible support parallel execution of tasks?	
+46.	Explain Ansible variable precedence.	
+47.	How do you handle secrets in Ansible?	
+48	Can Ansible be used for Infrastructure as Code (IAC)?	
+49.	What are the requirements for the Ansible server and managed nodes?	
+50.	How do you determine which inventory your Ansible is going to use?	
+51.	What is:	
+		a) control matching
+		b) inventory
+		c) playbook
+		d) tasks
+		e) module
+		f) role
+		g) play
+		h) facts
+		i) handlers
+52.	What is the {{}} notation used for?	
+53.	What is Jinja2 template?	
+54.	How is the Ansible node different from playbooks?	
+55.	Why do we need to use Ansible Vault?	
+56.	How can you decrypt Ansible Vault files?	
+57.	What is the protocol that Ansible uses?	
+58.	What loops and conditions are used in Ansible?	
+59.	How will you build your own modules in Ansible?	
+60.	What is the ask_pass control module in Ansible?	
+61.	What is dynamic inventory?	
+62.	What protocol does Ansible use to connect to Windows virtual machines (VMs)?	
+63.	How do you manage error handling in Ansible?	
+64.	What is an extra variable in Ansible?	
+65.	In which language is Ansible written?	
+66.	Which module is used to copy a file from a managed node to a control node?	
+67.	What is dry run or check mode?	
+68.	What is the directory tree structure for roles?	
+69.	How does Ansible determine whether to use the yum or apt command?	
+70.	How do you group servers in the inventory?	
+71.	How will you list a particular group of servers in the inventory?	
+72.	I don't want to execute the default inventory. I want to execute modules only on a specifically specified inventory. How will you do that?	
+73.	What is the default section? What are the entries available in the default section in /etc/ansible/ansible.cfg?	
+74.	What is previde_exlilations?	
+75.	How will you initialize a new role?	
+76.	What is the importance of flush_handlers in the meta module?	
+77.	What is the use of tags in Ansible?	
+78.	How does the raw module differ from the command or shell module?	
+79.	How will you install a module (How will you install a Python module)?	
+	Hint: pip3 install module	
+80.	Explain Ansible conditional operators.	
+81.	How will you create a bulk of users that are inputted from a CSV file?	
+82.	How will you add or replace a line in an Ansible file?	
+83.	What is the importance of the lineinfile module?	
+84.	How will you print Ansible facts?	
+85.	How will you disable Ansible facts while running a playbook?	
+86.	Why do you need sudo privileges for remote_user while running Ansible playbooks?	
+87.	Which tool or IDE do you use to work with Ansible playbooks?	
+	Ans: Vim, Notepad++, Visual Studio	
+88.	What is the latest/recent Ansible project you have done? What is your project involving Ansible at your work?	

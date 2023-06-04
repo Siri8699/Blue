@@ -1,0 +1,255 @@
+1. What is Ansible?
+2. What is configuration management?
+3. What are the features of Ansible?
+4. What is Infrastructure as Code?
+5. What is the architecture of Ansible? (Or) How does it work?
+6. What is an Ansible module?
+7. What are the different types of modules available?
+8. What is YAML?
+9. What is a play?
+10.What is a playbook?
+11.What are Ansible ad-hoc commands?
+12.What is the difference between a play and a playbook?
+13.What are the different sections available in an Ansible play?
+14.What is the Ansible configuration file?
+15.What is the Ansible inventory file?
+16.What are the different tasks?
+17.Write an Ansible playbook to configure the server without root access.
+18.What are the plugins in Ansible?
+19.What is the difference between static and dynamic inventory?
+20.Write a playbook to install the Nginx web server.
+21.What is the difference between Ansible and Puppet/Chef?
+22.What are Ansible Tower and its features?
+
+23.Give me an ad-hoc command to recursively copy files into a managed node.
+Ans: ansible 192.168.36.100 -m copy -a 'src=salute.txt dest= /etc/motd' -i hosts --become
+        And also synchronize module we can copy files recursively
+
+24.How do you make Ansible content reusable and redistributable?
+Ans: By using :
+                         include_vars
+                         include:
+                         vars_files:
+25.How do you generate an encrypted password using Ansible?
+Ans: ansible-vault create my_sec.yml
+
+26.How are the notation and array notation of variables different?
+Ans: The dot notation comes from Jinja and works fine for variables without special characters. If your variable contains dots (.), colons (:), or dashes (-), if a key         begins and ends with two underscores, or if a key uses any of the known public attributes, it is safer to use the array notation.
+        Another problem with ‘dot notation’ is that some keys can cause problems because they collide with attributes and methods of python dictionaries.
+
+27.What is an Ansible node?
+Ans: Ansible control nodes are primarily used to run tasks on managed hosts.
+
+28.How do the following modules work:
+	a) user
+	b) firewalld
+	c) synchronize
+	d) service
+
+29.What is the difference between the package module and the yum module?
+Ans: package calls behind the module for the package manager used by the operating system discovered by the module ansible.
+        Ansible's yum module is used to manage packages with the yum package manager, which is the default on Red Hat based Linux distributions such as Red         Hat Enterprise Linux and CentOS
+
+30.What are Ansible facts?
+Ans: Ansible facts are variable that are automatically discovered by ansible by a managed hosts. Facts are pulled by the setup module and contain usefull information stored into variables that administration can reuse.
+       Ansible facts can be part of playbook in conditionals or any other dynamic statement that depends on a value of managed hosts.
+
+31.Difference between var_files and include_file?	
+Ans:  vars_files are read when the play starts. include_vars are read when the play reaches the task. 
+
+32.What are magic variables?	 
+Ans:  These are variables that are always set when a playbook is run without them having to be explicitly created.
+         The most commonly used magic variables are hostvars, groups, group_names, and inventory_hostname. With hostvars, you can access variables defined           for any host in the play, at any point in a playbook
+
+33.What are registered variables?
+Ans: Registered variables are stored in memory. You cannot cache registered variables for use in future playbook runs. Registered variables are only valid on the host for the rest of the current playbook run, including subsequent plays within the same playbook run.
+Registered variables are host-level variables. When you register a variable in a task with a loop, the registered variable contains a value for each item in the loop.	
+
+34.What is a handler?	
+Ans: Handlers are usually used to start, restart, reload and stop services on target nodes only when there is a change in the state of the task, and not when no change is made.
+     -> They only invoked when the change is yes
+    -> Handlers are processed only after completing all the tasks
+
+35.What is the importance of the fail module?	
+Ans: In ansible, fail module is avialble to fail ansible playbook with custom message.fail module is used to exit the progress when certain condition is met.
+        message parameter is used to specify the custome message
+
+36.What are different ways to define an Ansible configuration file?
+Ans: We can configure the ansible configuration file in 3 ways:
+        The precedence of ansible.cfg is based on which location you execute.
+         1) ansible.cfg -> current directory : If it exist in current working directory it will have highest precedence.
+         2).ansible.cfg -> home directory : If it doesn't exist in your pwd, then in your home directory /.ansible.cfg file ill have the next precedence
+         3)Default configuration file: /etc/ansible/ansible.cfg :If /.ansible.cfg is missing in user home directory then /etc/ansible/ansible.cfg will have a precedence.
+                       ansible.cfg
+                             |
+                       .ansible.fg
+                             |
+                  /etc/ansible.ansible.cfg
+
+37.What are host and group variables?
+ans: The group_vars in Ansible are a convenient way to apply variables to multiple hosts at once.
+        The host_vars is a similar folder to group_vars in the repository structure. It contains data models that apply to individual hosts/devices in the hosts file	
+
+38.How will you connect a managed node with a different port number over SSH?	
+Ans: By default, Ansible ships with several connection plugins. The most commonly used are the paramiko SSH, native ssh (just called ssh), and local connection types. All of these can be used in playbooks and with /usr/bin/ansible to decide how you want to talk to remote machines.
+
+39.How will you encrypt a file with sensitive information?
+Ans:	ansible-vault create file_name.yml
+                  ansible-vault view file_name.yml
+                  ansible-vault decrypt file_name.yml --output=file_name_txt.yml
+                  ansible-vault encrypt file_name_txt.yml --output=file_name_on.yml
+
+40.What is Ansible Vault?	
+Ans: Ansible Vault is an Ansible feature that helps you encrypt confidential information without compromising security
+
+41.What is Ansible Galaxy?	
+Ans: Ansible Galaxy is a galaxy website where users can share roles and to a command-line tool for installing, creating, and managing roles. Ansible Galaxy         gives greater visibility to one of Ansible's most exciting features, such as application installation or reusable roles for server configuration
+
+42.How does Ansible help automate repetitive activities in your organization?
+Ans: Task automation is the use of software to reduce the manual handling of simple tasks or a series of more complex tasks with the goal of making processes         more efficient and employees more productive.	
+
+43.Explain the structure of an Ansible playbook using roles.
+Ans: Defaults: The main.yml file in this directory contains the default variables that can be overwritten when the role is used.
+        Files: This directory contains static files that are referred by role tasks
+        Handlers: The main.yml file  in this directory contains the role's handler definition.
+        Meta: The main.yml file in this directory contains info about the role, including author,license,platform and optinal role dependencies.
+        Tasks: The main.yml file in this directory contains the roles tasks
+        Template: This directory contains jinja2 templates that are feferrenced by role tasks
+        Test: This directory contains an inventory and test.yml playbook that can be used to test the role.
+        vars: The main.yml file in this directory defines role's variables values.
+
+44.How can you execute a specific set of tasks using an Ansible playbook?	
+Ans: By using the tags, by declaring the tags at last of task and calling the tags while running the play .So we can execute the particular task in playbook.
+        syntax: 
+                      ansible-playbook -t tag_name play_name.yml
+
+45.How does Ansible support parallel execution of tasks?	
+Ans: By using ansible roles ansible supports the parallel execution of tasks
+
+46.Explain Ansible variable precedence.	
+Ans: Variables with higher precedence will override variables with lower precedence
+        vars_files will have least precedenc when it is compared to include_vars.  
+
+47.How do you handle secrets in Ansible?
+Ans: By using vars_file : path/to/file and permisions of that file can be alterd by using chmod command 
+        And also using ansible-vault to encrypt the content of the file	
+
+48.Can Ansible be used for Infrastructure as Code (IAC)?
+Ans: Ansible is an open-source infrastructure as a code tool supported by RedHat. it is used to handle multiple server configurations and management from        one point. It helps automate the configuration of multiple servers at once, rather than connecting to an individual server and then carrying out your desired task.	
+
+49.What are the requirements for the Ansible server and managed nodes?	
+Ans:
+
+50.How do you determine which inventory your Ansible is going to use?	
+Ans: mkdir inventory
+        cd inventory
+        vi hosts
+        ansible-inventory -i hosts --list
+        ansible all -i  inventory -m ping
+        ansible-playbook -i hosts play_name.yml
+
+51.What is:	
+a) control machine : 
+b) inventory : Collection of host
+c) playbook : A file that contains more than one play is known as playbook
+d) tasks : A task is the smallest unit of action you can automate using an Ansible playbooks that ansible will manage
+e) module : Ansible modules are units of code that can control system resources or execute system commands.
+f) role : Ansible roles allow you to develop reusable automation components by grouping and encapsulating related automation artifacts, like configuration             files, templates, tasks, and handlers. Because roles isolate these components, it's easier to reuse them and share them with other people.
+g) play : A play perform series of tasks on the host (or) group of hosts.
+h) facts : Ansible facts are variables that are automatically discovered by ansible from managed host. Facts are pulled the setup module and contain useful info                stored into variables that administrator can reuse.
+i) handlers : Handlers are usually used to start, restart, reload and stop services on target nodes only when there is a change in the state of the task, and not                     when no change is made.
+                    -> They only invoked when the change is yes
+                    -> Handlers are processed only after completing all the tasks
+
+52.What is the {{ }} notation used for?	
+Ans: To determine a keyword  
+
+53.What is Jinja2 template?	
+Ans: Jinja2 is  a powerful and advanced templating language from python. It is very fast, reliable and widely used to generate dynamci data.It is text based         template language and can be used to generate any markup as well as source code.
+
+54.How is the Ansible node different from playbooks?	
+Ans:
+
+55.Why do we need to use Ansible Vault?	
+Ans: Used to keep passowrds and file securely
+
+56.How can you decrypt Ansible Vault files?	
+Ans:  ansible-vault decrypt filename --output=filename
+
+57.What is the protocol that Ansible uses?	
+Ans: ssh
+
+58.What loops and conditions are used in Ansible?	
+Ans: Loops: Ansible loop is used to repeat any task or a part of code multiple times in an Ansible-playbook.
+        Conditions : Ansible “When” statement is a conditional statement that runs the particular task if the condition is met and the condition should be based on                 the registered variable output, loop, gathered facts, declared variable output, and to create the dependencies between the tasks that is when the                 output from the first task matches certain value then the second task should be executed
+
+59.How will you build your own modules in Ansible?	
+Ans: Users can extend ansible functionality by writing their own modules and adding into ansible library. Modules are typically written in python , but they can          be wriiten in any intrepetted program language (shell, ruby, python)
+
+60.What is the ask_pass control module in Ansible?	
+Ans: Ask_pass is the control module in an Ansible playbook. This controls the prompting of the password when the playbook is getting executed. By default, it's          always set to True. If you are using SSH keys for authentication purposes then you really don't have to change this setting at all
+
+61.What is dynamic inventory?	
+Ans: Dynamic Inventory is an inventory management solution that provides inventory control and tracking features
+
+62.What protocol does Ansible use to connect to Windows virtual machines (VMs)?	
+Ans:
+
+63.How do you manage error handling in Ansible?	
+Ans: Blocks and rescue work together to provide error-handling capabilities in Ansible. Use the rescue keyword in association with a block to define a set of         tasks that will be executed if an error occurs in the block.
+
+64.What is an extra variable in Ansible?	
+Ans:These will override all the variables. That are hosts, hostsgroup,playbook
+        you may call ansible-playbook -e (-e / --extravars) option to inject extra variables into a playbook
+
+65.In which language is Ansible written?	
+Ans: Ansible is a tool written in Python, and it uses the declarative markup language YAML to describe the desired state of devices and configuration.
+
+66.Which module is used to copy a file from a managed node to a control node?	
+Ans: get_url
+
+67.What is dry run or check mode?
+Ans:Ansible Playbook Dry Run or Check mode is an essential feature that enables users to test and validate their Playbooks before executing them on production systems.
+	
+68.What is the directory tree structure for roles?	
+Ans: MyWeb
+        defaults  	files  	handlers     meta  	  README.md  	 tasks    	template    	tests   	               vars   
+       main.yml                       main.yml    main.yml                        main.yml                           inventory, test.yml     main.yml 
+
+69.How does Ansible determine whether to use the yum or apt command?	
+Ans: 
+
+70.How do you group servers in the inventory?	
+Ans: [siri]
+       192.168.36.200
+       192.168.36.100
+
+71.How will you list a particular group of servers in the inventory?	
+Ans: ansible groupname --list-hosts
+
+72.I don't want to execute the default inventory. I want to execute modules only on a specifically specified inventory. How will you do that?	
+Ans : ansible-inventory -i hosts --list
+        ansible all -i  inventory -m ping
+        ansible-playbook -i hosts play_name.yml
+
+73.What is the default section? What are the entries available in the default section in /etc/ansible/ansible.cfg?	
+Ans:
+
+74.What is privilige _escalation?	
+75.How will you initialize a new role?	
+76.What is the importance of flush_handlers in the meta module?	
+77.What is the use of tags in Ansible?	
+78.How does the raw module differ from the command or shell module?	
+79.How will you install a module (How will you install a Python module)?	
+	Hint: pip3 install module	
+80.Explain Ansible conditional operators.	
+81.How will you create a bulk of users that are inputted from a CSV file?	
+82.How will you add or replace a line in an Ansible file?	
+83.What is the importance of the lineinfile module?	
+84.How will you print Ansible facts?	
+85.How will you disable Ansible facts while running a playbook?	
+86.Why do you need sudo privileges for remote_user while running Ansible playbooks?	
+87.Which tool or IDE do you use to work with Ansible playbooks?	
+	Ans: Vim, Notepad++, Visual Studio	
+88.What is the latest/recent Ansible project you have done? What is your project involving Ansible at your work?	
+
